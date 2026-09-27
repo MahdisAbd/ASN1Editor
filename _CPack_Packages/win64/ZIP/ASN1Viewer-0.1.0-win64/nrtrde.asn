@@ -1,0 +1,82 @@
+NrtrdeModule DEFINITIONS ::= BEGIN
+
+NrtrdeFile ::= SEQUENCE {
+    nrtrde               Nrtrde,
+    mjVersion           INTEGER,
+    mnVersion           INTEGER
+}
+
+Nrtrde ::= SEQUENCE {
+    specificationVersionNumber  INTEGER OPTIONAL,
+    releaseVersionNumber        INTEGER OPTIONAL,
+    sender                      UTF8String OPTIONAL,
+    recipient                   UTF8String OPTIONAL,
+    sequenceNumber              UTF8String OPTIONAL,
+    fileAvailableTimeStamp      UTF8String OPTIONAL,
+    utcTimeOffset               UTF8String OPTIONAL,
+    callEvents                  CallEventList OPTIONAL,
+    callEventsCount             INTEGER OPTIONAL
+}
+
+CallEventList ::= SEQUENCE OF CallEvent
+
+CallEvent ::= CHOICE {
+    moc    Moc,
+    mtc    Mtc,
+    gprs   Gprs
+}
+
+Moc ::= SEQUENCE {
+    imsi                        UTF8String OPTIONAL,
+    imei                        UTF8String OPTIONAL,
+    callEventStartTimeStamp     UTF8String OPTIONAL,
+    utcTimeOffset               UTF8String OPTIONAL,
+    callEventDuration           INTEGER OPTIONAL,
+    causeForTermination         INTEGER OPTIONAL,
+    serviceCode                 ServiceCode OPTIONAL,
+    supplementaryServiceCode    UTF8String OPTIONAL,
+    dialledDigits               UTF8String OPTIONAL,
+    connectedNumber             UTF8String OPTIONAL,
+    thirdPartyNumber            UTF8String OPTIONAL,
+    recEntityId                 UTF8String OPTIONAL,
+    callReference               INTEGER OPTIONAL,
+    chargeAmount                INTEGER OPTIONAL
+}
+
+Mtc ::= SEQUENCE {
+    imsi                        UTF8String OPTIONAL,
+    imei                        UTF8String OPTIONAL,
+    callEventStartTimeStamp     UTF8String OPTIONAL,
+    utcTimeOffset               UTF8String OPTIONAL,
+    callEventDuration           INTEGER OPTIONAL,
+    causeForTermination         INTEGER OPTIONAL,
+    serviceCode                 ServiceCode OPTIONAL,
+    callingNumber               UTF8String OPTIONAL,
+    recEntityId                 UTF8String OPTIONAL,
+    callReference               INTEGER OPTIONAL,
+    chargeAmount                INTEGER OPTIONAL
+}
+
+Gprs ::= SEQUENCE {
+    imsi                        UTF8String OPTIONAL,
+    imei                        UTF8String OPTIONAL,
+    callEventStartTimeStamp     UTF8String OPTIONAL,
+    utcTimeOffset               UTF8String OPTIONAL,
+    callEventDuration           INTEGER OPTIONAL,
+    causeForTermination         INTEGER OPTIONAL,
+    accessPointNameNI           UTF8String OPTIONAL,
+    accessPointNameOI           UTF8String OPTIONAL,
+    dataVolumeIncoming          INTEGER OPTIONAL,
+    dataVolumeOutgoing          INTEGER OPTIONAL,
+    sgsnAddress                 UTF8String OPTIONAL,
+    ggsnAddress                 UTF8String OPTIONAL,
+    chargingId                  INTEGER OPTIONAL,
+    chargeAmount                INTEGER OPTIONAL
+}
+
+ServiceCode ::= CHOICE {
+    teleServiceCode     UTF8String,
+    bearerServiceCode   UTF8String
+}
+
+END
